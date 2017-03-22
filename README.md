@@ -130,6 +130,7 @@ void ofApp::exit()
 - **example-sync-multiple-videos**: This example syncs 4 FullHD files that were the result of splitting one 4K video file. 
 
 ![alt text](/images/example-controls.png "HPV Example showcasing all controls")
+![alt text](/images/equi.png "HPV Example showcasing 360 video playback")
 
 ## Compatibility
 
