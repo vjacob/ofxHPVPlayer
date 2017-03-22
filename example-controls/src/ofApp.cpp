@@ -11,9 +11,13 @@ void ofApp::setup()
 
     b_draw_stats = b_draw_gui = true;
     hpvPlayer.init(HPV::NewPlayer());
-    hpvPlayer.load("bbb_export.hpv");
-	hpvPlayer.setLoopState(OF_LOOP_NORMAL);
-    hpvPlayer.setDoubleBuffered(db);
+    
+    if (hpvPlayer.load("bbb_export.hpv"))
+    {
+        hpvPlayer.setLoopState(OF_LOOP_NORMAL);
+        hpvPlayer.setDoubleBuffered(db);
+    }
+
     
     this->setupUI();
     
@@ -39,7 +43,8 @@ void ofApp::update()
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw()
+{
 	ofBackground(0);
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 
@@ -66,8 +71,9 @@ void ofApp::draw(){
         speed_slider->draw();
         range_slider->draw();
         
-        gui_font.drawStringShadowed("speed", (ofGetWidth() / 2) + 310, speed_slider->getRect().y + (speed_slider->getRect().height/2) + 3, ofColor(225));
-        gui_font.drawStringShadowed("scrub + range", (ofGetWidth() / 2) + 310, range_slider->getRect().y + (range_slider->getRect().height/2) + 3, ofColor(225));
+        gui_font.drawStringShadowed("speed\n(middle mouse to reset)", (ofGetWidth() / 2) + 310, speed_slider->getRect().y + (speed_slider->getRect().height/2) + 3, ofColor(225));
+        gui_font.drawStringShadowed("scrub + range\npress 'b' and 'n' while clicking on the\nrange to define loop points\n(middle mouse to reset)", (ofGetWidth() / 2) + 310, range_slider->getRect().y + (range_slider->getRect().height/2) + 3, ofColor(225));
+
         gui_font.drawStringShadowed(hpvPlayer.getFileSummary(), (ofGetWidth() / 2) - 250, range_slider->getRect().y + 60, ofColor(225));
     }
     
