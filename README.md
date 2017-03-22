@@ -6,7 +6,7 @@ The HPV (High Performance Video) Eco-system is a cross-platform C++ toolset for 
 
 The HPV Eco-system was originally created by the University of Hasselt/iMinds for the European funded FP7 programma [Dreamspace](http://www.dreamspaceproject.eu/) to build
 an open and cross-platform toolset for the Unity game-engine to realize immersive video installation using multiple calibrated projectors. This project was baptized 'Holo_ToolSet'.
-This software, as well as working Windows 64bit plugin for Windows and example Unity projects, can be found in the original repository of the project [here](https://github.com/HasseltVR/Holo_Toolset).
+This software, as well as working Windows 64bit plugin for Windows and example Unity projects, can be found in the original repository of the project [Holo_ToolSet](https://github.com/HasseltVR/Holo_Toolset).
 œ
 ofxHPVPlayer is a partial fork of this technology allowing to use and playback HPV encoded video files in openFrameworks.
 
@@ -51,13 +51,9 @@ ofxHPVPlayer is a partial fork of this technology allowing to use and playback H
 - Check the examples showcasing different HPV functionalities.
 
 - **example-simple**: This is a barebones example on how to play an HPV file.
-
 - **example-controls**: This showcases (almost) all functionality available in the HPV system.
-
 - **example-slave-to-audio**: Sync an HPV video file to an audio file with **exactly** the same length.
-
 - **example-360video**: Playback 360 Equirectangular video files (handy for VR). Switch between equirectangular (latlong) and perspective modes.
-
 - **example-sync-multiple-videos**: This example syncs 4 FullHD files that were the result of splitting one 4K video file. 
 
 ## Compatibility
