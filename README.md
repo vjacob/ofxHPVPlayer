@@ -29,13 +29,15 @@ ofxHPVPlayer is a partial fork of this technology allowing to use and playback H
 			- good image quality, no alpha
 			- bigger filesize
 
-	- The encoder expect an in image sequence where each frame is a separate image. 
+	- The encoder expects an image sequence where each frame is a separate image with a incremental number in the filename. 
 	Supported filetypes are: `png, jpeg, jpg, tga, gif, bmp, psd, gif, hdr, pic, ppm, pgm` 
  
 - Frames are then further compressed via [LZ4](https://github.com/lz4/lz4) HQ to get even smaller file sizes.
 - Each videoplayer generates `playback state events` that can be captured in the openFrameworks application.
 - `Render backend agnostic`, can be attached to OpenGL or DirectX context
 - `Extensible format` that can contain multiple texture compression formats. Succesful tests have been made with `BPTC` and `ASTC` which will be available in a future update.
+
+![alt text](/images/hpv_creator.png "The HPV Creator")
 
 ## Conditions
 
