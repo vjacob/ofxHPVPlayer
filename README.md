@@ -67,6 +67,57 @@ int main( )
 - Creating HPV files with the HPVCreator. The latest release for Windows and Mac can be found on the original [Holo_ToolSet release page](https://github.com/HasseltVR/Holo_Toolset/releases). Or download the example HPV files [here](https://goo.gl/UGv5TP).
 - Generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
 - A good place to start is the `example-controls` project. Play around with the GUI to discover its functionality.
+- Minimal code that you need to play an HPV file:
+
+```C++
+//--------------------------------------------------------------
+void ofApp::setup()
+{
+    /* Init HPV Engine */
+    HPV::InitHPVEngine();
+    
+    /* Create resources for new player */
+    hpvPlayer.init(HPV::NewPlayer());
+    
+    /* Try to load file and start playback */
+    if (hpvPlayer.load("bbb_export.hpv"))
+    {
+        hpvPlayer.setLoopState(OF_LOOP_NORMAL);
+        hpvPlayer.play();
+    }
+    
+    /* Enable vertical sync, if file has fps > 60, you might have to set to false */
+    ofSetVerticalSync(true);
+    
+    /* Alternatively, if you experience playback stutter, try to toggle double-buffering true/false 
+     * Default: OFF
+     *
+     * hpvPlayer.setDoubleBuffered(true);
+     */
+}
+
+//--------------------------------------------------------------
+void ofApp::update()
+{ 
+    /* Update happens on global level for all active players by HPV Manager */
+    HPV::Update();
+}
+
+//--------------------------------------------------------------
+void ofApp::draw()
+{
+    /* Draw the texture fullscreen */
+    ofBackground(0);
+    hpvPlayer.draw(0,0,ofGetWidth(), ofGetHeight());
+}
+
+//--------------------------------------------------------------
+void ofApp::exit()
+{
+    /* Cleanup and destroy HPV Engine upon exit */
+    HPV::DestroyHPVEngine();
+}
+```
 
 ## Documentation
 
