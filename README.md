@@ -36,6 +36,8 @@ ofxHPVPlayer is a partial fork of this technology allowing to use and playback H
 - Each videoplayer generates `playback state events` that can be captured in the openFrameworks application.
 - `Render backend agnostic`, can be attached to OpenGL or DirectX context
 - `Extensible format` that can contain multiple texture compression formats. Succesful tests have been made with `BPTC` and `ASTC` which will be available in a future update.
+- Built-in logging system, able to log to file.
+- Built-in timed statistics for HDD read time, LZ4 de-compress time and GPU upload time, to debug playback issues.
 
 ![alt text](/images/hpv_creator.png "The HPV Creator")
 
