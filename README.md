@@ -10,8 +10,7 @@ This software, as well as working Windows 64bit plugin for Windows and example U
 
 ofxHPVPlayer is a partial fork of this technology allowing to use and playback HPV encoded video files in openFrameworks.
 
-![HPV IABR](/images/iabr.png)
-Format: ![Use of HPV tech in an immersive installation @ IABR Rotterdam 2016](url)
+![alt text](/images/iabr.png "Use of HPV tech in an immersive installation @ IABR Rotterdam 2016")
 
 ## Features
 
@@ -58,6 +57,8 @@ Format: ![Use of HPV tech in an immersive installation @ IABR Rotterdam 2016](ur
 - **example-slave-to-audio**: Sync an HPV video file to an audio file with **exactly** the same length.
 - **example-360video**: Playback 360 Equirectangular video files (handy for VR). Switch between equirectangular (latlong) and perspective modes.
 - **example-sync-multiple-videos**: This example syncs 4 FullHD files that were the result of splitting one 4K video file. 
+
+![alt text](/images/example-controls.png "HPV Example showcasing all controls")
 
 ## Compatibility
 
