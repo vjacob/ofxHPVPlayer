@@ -9,7 +9,7 @@ void ofApp::setup()
     
     if (hpvPlayer.load("equi_export.hpv"))
     {
-		hpvPlayer.setDoubleBuffered(true);
+        hpvPlayer.setDoubleBuffered(true);
         hpvPlayer.setLoopState(OF_LOOP_NORMAL);
         hpvPlayer.play();
     }

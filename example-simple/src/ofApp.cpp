@@ -5,51 +5,54 @@ static bool pauseState = false;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+    /* Init HPV Engine */
     HPV::InitHPVEngine();
-    HPV::AddEventListener(this, &ofApp::onHPVEvent);
-
+    
+    /* Create resources for new player */
     hpvPlayer.init(HPV::NewPlayer());
     
+    /* Try to load file and start playback */
     if (hpvPlayer.load("bbb_export.hpv"))
     {
-        hpvPlayer.setDoubleBuffered(true);
         hpvPlayer.setLoopState(OF_LOOP_NORMAL);
         hpvPlayer.play();
-
-		if (hpvPlayer.getFrameRate() > 60)
-		{
-			ofSetVerticalSync(false);
-			ofSetFrameRate(120);
-		}
-		else
-		{
-			ofSetVerticalSync(true);
-		}
     }
+    
+    /* Enable vertical sync, if file has fps > 60, you might have to set to false */
+    ofSetVerticalSync(true);
+    
+    /* Alternatively, if you experience playback stutter, try to toggle double-buffering true/false
+     * Default: OFF
+     *
+     * hpvPlayer.setDoubleBuffered(true);
+     */
 }
 
 //--------------------------------------------------------------
 void ofApp::update()
 {
+    /* Update happens on global level for all active players by HPV Manager */
     HPV::Update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-	ofBackground(0);
-    ofSetWindowTitle(ofToString(ofGetFrameRate()));
-
+void ofApp::draw()
+{
+    /* Draw the texture fullscreen */
+    ofBackground(0);
     hpvPlayer.draw(0,0,ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
 void ofApp::exit()
 {
+    /* Cleanup and destroy HPV Engine upon exit */
     HPV::DestroyHPVEngine();
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key)
+{
     if (key == 'f')
     {
         ofToggleFullscreen();

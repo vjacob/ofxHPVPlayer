@@ -12,9 +12,7 @@ public:
 	void exit();
     
     void onHPVEvent(const HPVEvent& event);
-    
-    void setupUI();
-    
+        
 	void keyPressed(int key);
     
 	ofxHPVPlayer hpvPlayer;
