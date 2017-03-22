@@ -7,7 +7,7 @@ The HPV (High Performance Video) Eco-system is a cross-platform C++ toolset for 
 The HPV Eco-system was originally created by the University of Hasselt/iMinds for the European funded FP7 programma [Dreamspace](http://www.dreamspaceproject.eu/) to build
 an open and cross-platform toolset for the Unity game-engine to realize immersive video installation using multiple calibrated projectors. This project was baptized 'Holo_ToolSet'.
 This software, as well as working Windows 64bit plugin for Windows and example Unity projects, can be found in the original repository of the project [Holo_ToolSet](https://github.com/HasseltVR/Holo_Toolset).
-œ
+
 ofxHPVPlayer is a partial fork of this technology allowing to use and playback HPV encoded video files in openFrameworks.
 
 ## Features
