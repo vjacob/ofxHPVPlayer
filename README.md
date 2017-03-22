@@ -64,7 +64,7 @@ int main( )
 
 ## Getting Started
 
-- Creating HPV files with the HPVCreator. The latest release for Windows and Mac can be found on the original [Holo_ToolSet release page](https://github.com/HasseltVR/Holo_Toolset/releases). Or download the example HPV files on [here](https://goo.gl/UGv5TP).
+- Creating HPV files with the HPVCreator. The latest release for Windows and Mac can be found on the original [Holo_ToolSet release page](https://github.com/HasseltVR/Holo_Toolset/releases). Or download the example HPV files [here](https://goo.gl/UGv5TP).
 - Generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
 - A good place to start is the `example-controls` project. Play around with the GUI to discover its functionality.
 
@@ -74,8 +74,8 @@ int main( )
 - Pre-compressed HPV video files accompanying the examples can be found [here](https://goo.gl/UGv5TP). Download the appropiate HPV file by looking at the examples and put it in the respective bin/data folder
 - **example-simple**: This is a barebones example on how to play an HPV file.
 - **example-controls**: This showcases (almost) all functionality available in the HPV system.
-- **example-slave-to-audio**: Sync an HPV video file to an audio file with **exactly** the same length.
-- **example-360video**: Playback 360 Equirectangular video files (handy for VR). Switch between equirectangular (latlong) and perspective modes.
+- **example-slave-to-audio**: Sync a HPV video file to an audio file with **exactly** the same length.
+- **example-360video**: Play high-res 360 VR video content. Switch between equirectangular (latlong) and perspective modes.
 - **example-sync-multiple-videos**: This example syncs 4 FullHD files that were the result of splitting one 4K video file. 
 
 ![alt text](/images/example-controls.png "HPV Example showcasing all controls")
