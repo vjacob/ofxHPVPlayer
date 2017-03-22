@@ -1,11 +1,3 @@
-//
-//  ParamSlider.h
-//  hpvTestMac
-//
-//  Created by Vincent Jacobs on 10/02/17.
-//
-//
-
 #ifndef ParamSliderItem_h
 #define ParamSliderItem_h
 

@@ -68,6 +68,7 @@ void ofApp::draw()
     ofDrawBitmapStringHighlight("Press 'e' to toggle between EQUIRECTANGULAR and PERSPECTIVE view", 50, 50);
 }
 
+//--------------------------------------------------------------
 void ofApp::exit()
 {
     HPV::DestroyHPVEngine();

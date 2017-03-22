@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-int prev_frame = 0;
+static int prev_frame = 0;
 static bool db = false;
 
 //--------------------------------------------------------------
@@ -16,22 +16,20 @@ void ofApp::setup()
     {
         hpvPlayer.setLoopState(OF_LOOP_NORMAL);
         hpvPlayer.setDoubleBuffered(db);
+        hpvPlayer.play();
+        
+        if (hpvPlayer.getFrameRate() > 60)
+        {
+            ofSetVerticalSync(false);
+            ofSetFrameRate(120);
+        }
+        else
+        {
+            ofSetVerticalSync(true);
+        }
     }
-
     
     this->setupUI();
-    
-    if (hpvPlayer.getFrameRate() >= 60)
-    {
-        ofSetVerticalSync(false);
-        ofSetFrameRate(120);
-    }
-    else
-    {
-        ofSetVerticalSync(true);
-    }
-    
-    hpvPlayer.play();
 }
 
 //--------------------------------------------------------------
@@ -81,6 +79,7 @@ void ofApp::draw()
     {
         std::stringstream ss;
         ss << "DOUBLE BUFFER: " << (db ? "ON" : "OFF")
+        << " ('d' toggles)"
         << std::endl
         << "HDD: " << hpvPlayer.getDecodeStatsPtr()->hdd_read_time / 1e6 << "ms"
         << std::endl
@@ -102,11 +101,13 @@ void ofApp::draw()
     }
 }
 
+//--------------------------------------------------------------
 void ofApp::exit()
 {
     HPV::DestroyHPVEngine();
 }
 
+//--------------------------------------------------------------
 void ofApp::setupUI()
 {
     float half_width = ofGetWidth() / 2;
@@ -159,26 +160,6 @@ void ofApp::keyPressed(int key){
     else if (key == '-')
     {
         hpvPlayer.previousFrame();
-    }
-    else if (key == ' ')
-    {
-        static int c;
-        
-        hpvPlayer.close();
-        
-        ++c;
-        (c % 2 == 0) ? hpvPlayer.load("IABR+framenum.hpv") : hpvPlayer.load("BBB_export.hpv");
-
-        hpvPlayer.play();
-        
-        if (hpvPlayer.getFrameRate() > 60)
-        {
-            ofSetVerticalSync(false);
-        }
-        else
-        {
-            ofSetVerticalSync(true);
-        }
     }
     else if (key == 'd')
     {

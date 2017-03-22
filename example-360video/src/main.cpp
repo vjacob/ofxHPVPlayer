@@ -1,8 +1,8 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
-//========================================================================
-int main( ){
+int main( )
+{
     ofGLWindowSettings settings;
     settings.width = 1024;
     settings.height = 512;

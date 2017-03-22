@@ -90,6 +90,12 @@ void ofApp::draw()
 }
 
 //--------------------------------------------------------------
+void ofApp::exit()
+{
+    HPV::DestroyHPVEngine();
+}
+
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
     if (key == 'a')

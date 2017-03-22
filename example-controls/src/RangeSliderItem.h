@@ -1,11 +1,3 @@
-//
-//  RangeSliderItem.h
-//  hpvTestMac
-//
-//  Created by Vincent Jacobs on 29/01/17.
-//
-//
-
 #ifndef RangeSliderItem_h
 #define RangeSliderItem_h
 

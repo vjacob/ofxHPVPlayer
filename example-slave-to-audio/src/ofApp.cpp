@@ -12,7 +12,7 @@ void ofApp::setup()
         hpvPlayer.setLoopState(OF_LOOP_NORMAL);
         hpvPlayer.setPaused(true);
         
-        if (hpvPlayer.getFrameRate() >= 60)
+        if (hpvPlayer.getFrameRate() > 60)
         {
             ofSetVerticalSync(false);
             ofSetFrameRate(120);
@@ -46,6 +46,7 @@ void ofApp::draw()
     hpvPlayer.draw(0,0,ofGetWidth(), ofGetHeight());
 }
 
+//--------------------------------------------------------------
 void ofApp::exit()
 {
     HPV::DestroyHPVEngine();
@@ -64,6 +65,7 @@ void ofApp::keyPressed(int key)
     }
 }
 
+//--------------------------------------------------------------
 void ofApp::onHPVEvent(const HPVEvent& event)
 {
     switch (event.type)

@@ -1,11 +1,3 @@
-//
-//  MenuItem.h
-//  hpvTestMac
-//
-//  Created by Vincent Jacobs on 05/01/17.
-//
-//
-
 #ifndef MenuItem_h
 #define MenuItem_h
 
