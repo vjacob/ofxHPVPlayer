@@ -15,6 +15,8 @@ ofxHPVPlayer is a partial fork of this technology allowing to use and playback H
 - Play `FullHD/4K/8K video files` at high framerates
 	- Max achievable framerate is limited by the performance of your computer (HDD read speed, CPU speed, throughput speed of PCI-Express bus)
 - `Optimized for playing multiple videofiles at the same time`.
+- Allows for `single play, looping and palindrome looping` behaviour.
+- `Fast scrubbing` between frames, even for 4K+ files.
 - Supports `blitting` (direct CPU texture to GPU texture) and `double buffered` playback (on OpenGL, using Pixel Buffer Objects)
 - Self-contained custom HPV file format with `no dependencies` to platform specific media frameworks.
 - Frames are compressed using texture compression methods (DXT). `Open source GUI HPV encoder` is provided for Windows & Mac
@@ -136,6 +138,7 @@ void ofApp::exit()
 
 ## Compatibility
 
+- Built and tested with OF 0.9.8
 - Tested on Windows 7, 8 and 10.
 - Tested on Max OSX 10.10.5. 
 - Should work in Linux, but yet to be tested.
