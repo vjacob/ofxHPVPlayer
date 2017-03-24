@@ -17,16 +17,16 @@ using namespace HPV;
 class ofxHPVPlayer
 {
 public:
-	ofxHPVPlayer();
-	~ofxHPVPlayer();
+    ofxHPVPlayer();
+    ~ofxHPVPlayer();
     
     void init(HPVPlayerRef internal_hpv_player);
 
-    bool				load(string name);
-    bool				loadAsync(string name);
+    bool                load(string name);
+    bool                loadAsync(string name);
     
-    void				play();
-    void				stop();
+    void                play();
+    void                stop();
     void                close();
     
     /* 
@@ -34,16 +34,16 @@ public:
      * bool                isFrameNew() const;
      */
     
-    ofTexture *			getTexturePtr();
-    float 				getWidth() const;
-    float 				getHeight() const;
-    float 				getPosition() const;
-    float 				getSpeed() const;
-    float 				getDuration() const;
-    bool				getIsMovieDone() const;
-    int					getCurrentFrame() const;
-    int					getTotalNumFrames() const;
-    ofLoopType			getLoopState() const;
+    ofTexture *         getTexturePtr();
+    float               getWidth() const;
+    float               getHeight() const;
+    float               getPosition() const;
+    float               getSpeed() const;
+    float               getDuration() const;
+    bool                getIsMovieDone() const;
+    int                 getCurrentFrame() const;
+    int                 getTotalNumFrames() const;
+    ofLoopType          getLoopState() const;
     int64_t             getLoopIn() const;
     int64_t             getLoopOut() const;
     int                 getFrameRate() const;
@@ -59,17 +59,17 @@ public:
      * const ofPixels&     getPixels() const;
      */
     
-    bool				isPaused() const;
-    bool				isLoaded() const;
-    bool				isPlaying() const;
-    bool				isInitialized() const{ return isLoaded(); }
+    bool                isPaused() const;
+    bool                isLoaded() const;
+    bool                isPlaying() const;
+    bool                isInitialized() const{ return isLoaded(); }
    
-    void 				setPaused(bool bPause);
-    void 				setPosition(float pct);
-    void 				setVolume(float volume);
-    void 				setLoopState(ofLoopType state);
-    void   				setSpeed(float speed);
-    void				setFrame(int frame);
+    void                setPaused(bool bPause);
+    void                setPosition(float pct);
+    void                setVolume(float volume);
+    void                setLoopState(ofLoopType state);
+    void                setSpeed(float speed);
+    void                setFrame(int frame);
     void                setLoopIn(uint64_t loopIn);
     void                setLoopOut(uint64_t loopOut);
     void                setPlayDirection(bool direction);
@@ -78,9 +78,9 @@ public:
     
     void                setDoubleBuffered(bool bDoubleBuffer);
      
-    void				firstFrame();
-    void				nextFrame();
-    void				previousFrame();
+    void                firstFrame();
+    void                nextFrame();
+    void                previousFrame();
     void                lastFrame();
    
     HPVDecodeStats *    getDecodeStatsPtr() const;
@@ -94,5 +94,3 @@ private:
     ofTexture           m_texture;
     HPVPlayerRef        m_hpv_player;
 };
-
-

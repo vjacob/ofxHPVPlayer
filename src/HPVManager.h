@@ -36,14 +36,14 @@ namespace HPV {
         HPVManager();
         ~HPVManager();
         
-        uint8_t		                initPlayer();
+        uint8_t                     initPlayer();
         HPVPlayerRef                getPlayer(uint8_t node_id);
         std::size_t                 getNumPlayers() { return m_players.size(); }
         std::vector<bool>           update();
         void                        closeAll();
         void                        postEvent(const HPVEvent& event);
         void                        processEvents();
-		bool                        isValidNodeId(uint8_t node_id) { return node_id >= 0 && node_id < m_players.size(); }
+        bool                        isValidNodeId(uint8_t node_id) { return node_id >= 0 && node_id < m_players.size(); }
         
         std::vector<HPVEventCallback> m_event_listeners;
 
@@ -60,7 +60,7 @@ namespace HPV {
     HPVManager *    ManagerSingleton();
     void            InitHPVEngine(bool log_to_file=false);
     void            DestroyHPVEngine();
-    HPVPlayerRef	NewPlayer();
+    HPVPlayerRef    NewPlayer();
     void            Update();
     
     /*
@@ -75,18 +75,18 @@ namespace HPV {
         ManagerSingleton()->m_event_listeners.back() = std::bind(listenerMethod, owner, _1);
     }
 
-	/*
-	*  Templated method to add static function listeners to the HPV system.
-	*/
-	template<typename args>
-	void AddEventListener(void (*listenerMethod)(args))
-	{
-		using namespace std::placeholders;
-		HPVEventCallback cb;
-		ManagerSingleton()->m_event_listeners.push_back(cb);
-		ManagerSingleton()->m_event_listeners.back() = std::bind(listenerMethod, _1);
-	}
-}
+    /*
+    *  Templated method to add static function listeners to the HPV system.
+    */
+    template<typename args>
+    void AddEventListener(void (*listenerMethod)(args))
+    {
+        using namespace std::placeholders;
+        HPVEventCallback cb;
+        ManagerSingleton()->m_event_listeners.push_back(cb);
+        ManagerSingleton()->m_event_listeners.back() = std::bind(listenerMethod, _1);
+    }
+} /* End HPV namespace */
 
 /* The HPV Manager Singleton */
 extern HPV::HPVManager m_HPVManager;

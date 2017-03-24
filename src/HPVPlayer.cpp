@@ -2,9 +2,9 @@
 
 namespace HPV {
     
-	HPVPlayer::HPVPlayer()
-	: _num_bytes_in_header(0)
-	, _id(0)
+    HPVPlayer::HPVPlayer()
+    : _num_bytes_in_header(0)
+    , _id(0)
     , _filesize(0)
     , _bytes_per_frame(0)
     , _new_frame_time(0)
@@ -45,7 +45,7 @@ namespace HPV {
         {
             close();
         }
-		HPV_VERBOSE("~HPVPLayer");
+        HPV_VERBOSE("~HPVPLayer");
     }
     
     int HPVPlayer::open(const std::string& filepath)
@@ -473,12 +473,12 @@ namespace HPV {
     }
     
     /*
-     *	Threaded function. Updates the times until a new frame should be read.
+     *  Threaded function. Updates the times until a new frame should be read.
      *
-     *	The result is stored in std::atomic<bool> updateResult. This way, the main thread
-     *	can query when a new frame is ready.
-     *	updateResult > 0	-> new frame is ready
-     *	updateResult = 0	-> not yet there, still iterating
+     *  The result is stored in std::atomic<bool> updateResult. This way, the main thread
+     *  can query when a new frame is ready.
+     *  updateResult > 0    -> new frame is ready
+     *  updateResult = 0    -> not yet there, still iterating
      *
      */
     void HPVPlayer::update()
@@ -610,7 +610,7 @@ namespace HPV {
         if (speed < HPV_SPEED_EPSILON && speed > -HPV_SPEED_EPSILON)
         {
             // avoid stopping the video!
-			return HPV_RET_ERROR;
+            return HPV_RET_ERROR;
         }
         
         // fwd
@@ -640,7 +640,7 @@ namespace HPV {
     {
         if (direction)
         {
-			_direction = HPV_DIRECTION_FORWARDS;
+            _direction = HPV_DIRECTION_FORWARDS;
         }
         else
         {
@@ -712,12 +712,12 @@ namespace HPV {
     
     int HPVPlayer::isPlaying()
     {
-		return (_state == HPV_STATE_PLAYING);
+        return (_state == HPV_STATE_PLAYING);
     }
     
     int HPVPlayer::isPaused()
     {
-		return (_state == HPV_STATE_PAUSED);
+        return (_state == HPV_STATE_PAUSED);
     }
     
     int HPVPlayer::isStopped()
@@ -878,4 +878,4 @@ namespace HPV {
     {
         _m_event_sink = sink;
     }
-} /* namespace HPV */
+} /* End HPV namespace */

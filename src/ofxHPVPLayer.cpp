@@ -71,10 +71,10 @@ void ofxHPVPlayer::init(HPVPlayerRef internal_hpv_player)
 // Opens the video file
 bool ofxHPVPlayer::load(string name)
 {
-	int ret = m_hpv_player->open(ofToDataPath(name, true).c_str());
+    int ret = m_hpv_player->open(ofToDataPath(name, true).c_str());
 
-	if (ret == HPV_RET_ERROR_NONE)
-	{
+    if (ret == HPV_RET_ERROR_NONE)
+    {
         ret = RendererSingleton()->createGPUResources(m_hpv_player->getID());
         
         if (ret == HPV_RET_ERROR_NONE)
@@ -103,9 +103,9 @@ bool ofxHPVPlayer::load(string name)
         {
             HPV_ERROR("Couldn't create OpenGL resources for '%s'", name.c_str());
         }
-	}
+    }
 
-	return ret;
+    return ret;
 }
 
 bool ofxHPVPlayer::loadAsync(string name)
@@ -270,7 +270,7 @@ ofLoopType ofxHPVPlayer::getLoopState() const
             break;
             
         default:
-			return OF_LOOP_NONE;
+            return OF_LOOP_NONE;
             break;
     }
 }
@@ -310,7 +310,7 @@ void ofxHPVPlayer::lastFrame()
 // Closes the video file and the file stream
 void ofxHPVPlayer::close()
 {
-	m_hpv_player->close();
+    m_hpv_player->close();
 }
 
 // Set loop in point, this is the new 'start' point
@@ -322,37 +322,37 @@ void ofxHPVPlayer::setLoopIn(uint64_t loopIn)
 // Set loop out point, this is the new 'end' point
 void ofxHPVPlayer::setLoopOut(uint64_t loopOut)
 {
-	m_hpv_player->setLoopOutPoint(loopOut);
+    m_hpv_player->setLoopOutPoint(loopOut);
 }
 
 // Report back the video frame rate
 int ofxHPVPlayer::getFrameRate() const
 {
-	return m_hpv_player->getFrameRate();
+    return m_hpv_player->getFrameRate();
 }
 
 // Report back the video compression type
 int ofxHPVPlayer::getCompressionType() const
 {
-	return static_cast<int>(m_hpv_player->getCompressionType());
+    return static_cast<int>(m_hpv_player->getCompressionType());
 }
 
 // set the playback direction
 void ofxHPVPlayer::setPlayDirection(bool direction)
 {
-	m_hpv_player->setPlayDirection(direction);
+    m_hpv_player->setPlayDirection(direction);
 }
 
 // seek to normalized pos in range [0.,1.]
 void ofxHPVPlayer::seekToPos(double pos)
 {
-	m_hpv_player->seek(pos);
+    m_hpv_player->seek(pos);
 }
 
 // seek to frame number
 void ofxHPVPlayer::seekToFrame(int64_t frame)
 {
-	m_hpv_player->seek(frame);
+    m_hpv_player->seek(frame);
 }
 
 bool ofxHPVPlayer::needsDoubleBuffering() const

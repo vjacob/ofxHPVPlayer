@@ -17,13 +17,13 @@
 
 #define HPV_MAGIC 0x48505646
 
-#define HPV_VERSION_0_0_0 0		/* The first release; simply wrotes every file concatenated into the output. */
-#define HPV_VERSION_0_0_1 1		/* Added a bit more logic and storing the width, height and number of encoded frames. */
-#define HPV_VERSION_0_0_2 2		/* Added frame rate field */
-#define HPV_VERSION_0_0_3 3		/* Added DXT1 (no alpha) <-> DXT5 (alpha) implementation */
-#define HPV_VERSION_0_0_4 4		/* Added some reserved field for later use */
-#define HPV_VERSION_0_0_5 5		/* Added DXT5_SCALED_CoCgY for better quality */
-#define HPV_VERSION_0_0_6 6		/* Added LZ4 compression/decompression stage */
+#define HPV_VERSION_0_0_0 0     /* The first release; simply wrotes every file concatenated into the output. */
+#define HPV_VERSION_0_0_1 1     /* Added a bit more logic and storing the width, height and number of encoded frames. */
+#define HPV_VERSION_0_0_2 2     /* Added frame rate field */
+#define HPV_VERSION_0_0_3 3     /* Added DXT1 (no alpha) <-> DXT5 (alpha) implementation */
+#define HPV_VERSION_0_0_4 4     /* Added some reserved field for later use */
+#define HPV_VERSION_0_0_5 5     /* Added DXT5_SCALED_CoCgY for better quality */
+#define HPV_VERSION_0_0_6 6     /* Added LZ4 compression/decompression stage */
 
 #define HPV_MAX_SIDE_SIZE 8192
 #define HPV_LZ4_COMPRESSION_LEVEL 9
@@ -37,11 +37,11 @@ namespace HPV
     // This enum defines the different compression types.
     //
     // - RGB pixels can be compressed as
-    //		* DXT1:			[RGB(A) input]:	ok image quality, no alpha, 0.5 bpp
-    //		* scaled DXT5:	[CoCg_Y input]:	good image quality, no alpha, 1bpp
+    //      * DXT1:         [RGB(A) input]: ok image quality, no alpha, 0.5 bpp
+    //      * scaled DXT5:  [CoCg_Y input]: good image quality, no alpha, 1bpp
     //
     // - RGBA pixels can be compressed as:
-    //		* DXT5:			[RGB(A) input]:	ok image quality, alpha with good gradients, 1bpp
+    //      * DXT5:         [RGB(A) input]: ok image quality, alpha with good gradients, 1bpp
     enum class HPVCompressionType : std::uint32_t
     {
         HPV_TYPE_DXT1_NO_ALPHA = 0,
@@ -62,14 +62,14 @@ namespace HPV
     struct HPVHeader
     {
         /* VERSION 1 */
-        uint32_t magic;					/* codename */
-        uint32_t version;				/* internal version of API */
-        uint32_t video_width;			/* the width of each video frame */
-        uint32_t video_height;			/* the height of each video frame */
-        uint32_t number_of_frames;		/* the total amount of frames in the file */
+        uint32_t magic;                 /* codename */
+        uint32_t version;               /* internal version of API */
+        uint32_t video_width;           /* the width of each video frame */
+        uint32_t video_height;          /* the height of each video frame */
+        uint32_t number_of_frames;      /* the total amount of frames in the file */
         
         /* VERSION 2 */
-        uint32_t frame_rate;			/* frame rate at which the file should be played back */
+        uint32_t frame_rate;            /* frame rate at which the file should be played back */
         
         /* VERSION 3 */
         HPVCompressionType compression_type;      /* The used compression type */
@@ -118,5 +118,4 @@ namespace HPV
         ofs->flush();
         return 0;
     }
-    
-} /* namespace HPV */
+} /* End HPV namespace */

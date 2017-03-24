@@ -93,10 +93,10 @@ public:
         return data_queue.size();
     }
 
-	void clear()
-	{
-		std::lock_guard<std::mutex> lock(mtx);
-		std::queue<T> empty;
-		std::swap(data_queue, empty);
-	}
+    void clear()
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        std::queue<T> empty;
+        std::swap(data_queue, empty);
+    }
 };

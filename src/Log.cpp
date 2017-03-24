@@ -241,5 +241,4 @@ namespace HPV {
         hpv_log.log(HPV_LOG_LEVEL_ERROR, fmt, args);
         va_end(args);
     }
-    
-} /* namespace HPV */
+} /* End HPV namespace */

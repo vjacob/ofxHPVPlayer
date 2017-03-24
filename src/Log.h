@@ -65,8 +65,6 @@ namespace HPV {
         std::ofstream ofs;                     /* The output file stream */
     };
 
-  /* --------------------------------------------------------------------------------- */
-
   extern Log hpv_log;
 
-} /* namespace HPV */
+} /* End HPV namespace */

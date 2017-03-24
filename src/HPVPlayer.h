@@ -26,23 +26,23 @@
 #include "ThreadSafeQueue.h"
 #include "Timer.h"
 
-#define HPV_READ_PATH_ERROR			0x00
-#define HPV_READ_HEADER_ERROR		0x01
-#define HPV_READ_DIMENSION_ERROR	0x02
+#define HPV_READ_PATH_ERROR         0x00
+#define HPV_READ_HEADER_ERROR       0x01
+#define HPV_READ_DIMENSION_ERROR    0x02
 
-#define HPV_STATE_NONE				0x00
-#define HPV_STATE_PLAYING			0x01
-#define HPV_STATE_PAUSED			0x02
-#define HPV_STATE_STOPPED			0x04
+#define HPV_STATE_NONE              0x00
+#define HPV_STATE_PLAYING           0x01
+#define HPV_STATE_PAUSED            0x02
+#define HPV_STATE_STOPPED           0x04
 
-#define HPV_LOOPMODE_NONE			0x00    /* Plays once, then stops. */
-#define HPV_LOOPMODE_LOOP			0x01    /* Will continuously play, when the end frame has been reached we switch back tot he first one. */
-#define HPV_LOOPMODE_PALINDROME		0x02    /* Will loop back and forth */
+#define HPV_LOOPMODE_NONE           0x00    /* Plays once, then stops. */
+#define HPV_LOOPMODE_LOOP           0x01    /* Will continuously play, when the end frame has been reached we switch back tot he first one. */
+#define HPV_LOOPMODE_PALINDROME     0x02    /* Will loop back and forth */
 
-#define HPV_DIRECTION_FORWARDS		0x00
-#define HPV_DIRECTION_REVERSE		0x01
+#define HPV_DIRECTION_FORWARDS      0x00
+#define HPV_DIRECTION_REVERSE       0x01
 
-#define HPV_SPEED_EPSILON			0.05
+#define HPV_SPEED_EPSILON           0.05
 
 /* --------------------------------------------------------------------------------- */
 namespace HPV {
@@ -60,7 +60,7 @@ namespace HPV {
 #ifdef _MSC_VER
         return max(lower, min(n, upper));
 #else
-		return std::max(lower, std::min(n, upper));
+        return std::max(lower, std::min(n, upper));
 #endif
     }
     
@@ -124,7 +124,7 @@ namespace HPV {
         int             isPaused();
         int             isStopped();
         
-		uint8_t			_id;
+        uint8_t         _id;
         bool            _gather_stats;
         HPVDecodeStats  _decode_stats;
         int             enableStats(bool get_stats);
@@ -174,4 +174,4 @@ namespace HPV {
     
     typedef std::shared_ptr<HPV::HPVPlayer> HPVPlayerRef;
     
-} /* namespace HPV */
+} /* End HPV namespace */

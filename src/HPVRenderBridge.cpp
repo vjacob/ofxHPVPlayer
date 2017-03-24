@@ -6,53 +6,53 @@
 
 namespace HPV {
 
-	/* The HPV Renderer Singleton */
-	HPVRenderBridge m_HPVRenderer;
+    /* The HPV Renderer Singleton */
+    HPVRenderBridge m_HPVRenderer;
     
     static bool m_double_buffer = false;
 
-	static void ReportGLError()
-	{
-		GLenum err = GL_NO_ERROR;
-		while ((err = glGetError()) != GL_NO_ERROR)
-		{
-			if (err == GL_INVALID_ENUM)
-			{
-				HPV_ERROR("GL_INVALID_ENUM");
-			}
-			else if (err == GL_INVALID_VALUE)
-			{
-				HPV_ERROR("GL_INVALID_VALUE");
-			}
-			else if (err == GL_INVALID_OPERATION)
-			{
-				HPV_ERROR("GL_INVALID_OPERATION");
-			}
-			else
-			{
-				HPV_ERROR("Other GL Error");
-			}
-		}
-	}
+    static void ReportGLError()
+    {
+        GLenum err = GL_NO_ERROR;
+        while ((err = glGetError()) != GL_NO_ERROR)
+        {
+            if (err == GL_INVALID_ENUM)
+            {
+                HPV_ERROR("GL_INVALID_ENUM");
+            }
+            else if (err == GL_INVALID_VALUE)
+            {
+                HPV_ERROR("GL_INVALID_VALUE");
+            }
+            else if (err == GL_INVALID_OPERATION)
+            {
+                HPV_ERROR("GL_INVALID_OPERATION");
+            }
+            else
+            {
+                HPV_ERROR("Other GL Error");
+            }
+        }
+    }
 
-	HPVRenderBridge::HPVRenderBridge() : m_renderer(HPVRendererType::RENDERER_NONE)
-	{
-		s3tc_supported = false;
-		pbo_supported = false;
-	}
+    HPVRenderBridge::HPVRenderBridge() : m_renderer(HPVRendererType::RENDERER_NONE)
+    {
+        s3tc_supported = false;
+        pbo_supported = false;
+    }
 
-	HPVRenderBridge::~HPVRenderBridge()
-	{
-		HPV_VERBOSE("~RenderBridge");
-	}
+    HPVRenderBridge::~HPVRenderBridge()
+    {
+        HPV_VERBOSE("~RenderBridge");
+    }
 
-	void HPVRenderBridge::setRenderer(HPVRendererType renderer)
-	{
-		m_renderer = renderer;
-	}
+    void HPVRenderBridge::setRenderer(HPVRendererType renderer)
+    {
+        m_renderer = renderer;
+    }
 
-	void HPVRenderBridge::load()
-	{
+    void HPVRenderBridge::load()
+    {
         setRenderer(HPVRendererType::RENDERER_OPENGLCORE);
         
         GLint major, minor;
@@ -75,33 +75,33 @@ namespace HPV {
         m_render_funcs[(uint8_t)HPV::HPVRenderState::STATE_BLIT]   = std::bind(&HPV::HPVRenderBridge::blit_func,   this, _1);
     }
     
-	void HPVRenderBridge::unload()
-	{
-		setRenderer(HPVRendererType::RENDERER_NONE);
-	}
+    void HPVRenderBridge::unload()
+    {
+        setRenderer(HPVRendererType::RENDERER_NONE);
+    }
 
-	int HPVRenderBridge::initPlayer(uint8_t node_id)
-	{
-		m_render_data.insert(std::pair<uint8_t, HPVRenderData>(node_id, HPVRenderData()));
-		return HPV_RET_ERROR_NONE;
-	}
+    int HPVRenderBridge::initPlayer(uint8_t node_id)
+    {
+        m_render_data.insert(std::pair<uint8_t, HPVRenderData>(node_id, HPVRenderData()));
+        return HPV_RET_ERROR_NONE;
+    }
 
-	int HPVRenderBridge::createGPUResources(uint8_t node_id)
-	{
-		if (m_render_data.find(node_id) == m_render_data.end())
-		{
-			HPV_ERROR("Can't create resources, player %d was not allocated!", node_id);
-			return HPV_RET_ERROR;
-		}
+    int HPVRenderBridge::createGPUResources(uint8_t node_id)
+    {
+        if (m_render_data.find(node_id) == m_render_data.end())
+        {
+            HPV_ERROR("Can't create resources, player %d was not allocated!", node_id);
+            return HPV_RET_ERROR;
+        }
 
-		HPVRenderData& data = m_render_data.at(node_id);
-		data.player = ManagerSingleton()->getPlayer(node_id);
-		data.stats.after_upload = 0;
-		data.stats.before_upload = 0;
-		data.gpu_resources_need_init = true;
+        HPVRenderData& data = m_render_data.at(node_id);
+        data.player = ManagerSingleton()->getPlayer(node_id);
+        data.stats.after_upload = 0;
+        data.stats.before_upload = 0;
+        data.gpu_resources_need_init = true;
 
         if (HPVRendererType::RENDERER_OPENGLCORE == m_renderer)
-		{
+        {
             HPVCompressionType ct = data.player->getCompressionType();
             
             switch (ct) {
@@ -122,85 +122,85 @@ namespace HPV {
                     break;
             }
 
-			glGenTextures(1, &data.opengl.tex);
+            glGenTextures(1, &data.opengl.tex);
             
-			glBindTexture(GL_TEXTURE_2D, data.opengl.tex);
+            glBindTexture(GL_TEXTURE_2D, data.opengl.tex);
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-			// allocate texture storage for this texture
-			glTexStorage2D(GL_TEXTURE_2D, 1, data.opengl.gl_format, data.player->getWidth(), data.player->getHeight());
+            // allocate texture storage for this texture
+            glTexStorage2D(GL_TEXTURE_2D, 1, data.opengl.gl_format, data.player->getWidth(), data.player->getHeight());
 
-			if (pbo_supported)
-			{
+            if (pbo_supported)
+            {
                 glGenBuffers(2, data.opengl.pboIds);
                 
                 data.needs_buffer = true;
             }
             
-			glBindTexture(GL_TEXTURE_2D, 0);
+            glBindTexture(GL_TEXTURE_2D, 0);
 
-			data.gpu_resources_need_init = false;
+            data.gpu_resources_need_init = false;
             
             this->setRenderState(node_id, HPVRenderState::STATE_BLIT);
 
-			ReportGLError();
+            ReportGLError();
 
-			return HPV_RET_ERROR_NONE;
-		}
+            return HPV_RET_ERROR_NONE;
+        }
 
-		return HPV_RET_ERROR_NONE;
-	}
+        return HPV_RET_ERROR_NONE;
+    }
 
-	int HPVRenderBridge::nodeHasResources(uint8_t node_id)
-	{
-		return static_cast<int>(!m_render_data[node_id].gpu_resources_need_init);
-	}
+    int HPVRenderBridge::nodeHasResources(uint8_t node_id)
+    {
+        return static_cast<int>(!m_render_data[node_id].gpu_resources_need_init);
+    }
 
-	int HPVRenderBridge::deleteGPUResources()
-	{
-		for (auto& data : m_render_data)
-		{
-			if (data.second.gpu_resources_need_init)
-			{
-				continue;
-			}
+    int HPVRenderBridge::deleteGPUResources()
+    {
+        for (auto& data : m_render_data)
+        {
+            if (data.second.gpu_resources_need_init)
+            {
+                continue;
+            }
 
             if (HPVRendererType::RENDERER_OPENGLCORE == m_renderer)
-			{
-				glDeleteTextures(1, &data.second.opengl.tex);
-				glDeleteBuffers(2, &data.second.opengl.pboIds[0]);
-			}
-		}
+            {
+                glDeleteTextures(1, &data.second.opengl.tex);
+                glDeleteBuffers(2, &data.second.opengl.pboIds[0]);
+            }
+        }
 
-		m_render_data.clear();
+        m_render_data.clear();
 
-		HPV_VERBOSE("Deleted GPU resources");
+        HPV_VERBOSE("Deleted GPU resources");
 
-		return HPV_RET_ERROR_NONE;
-	}
+        return HPV_RET_ERROR_NONE;
+    }
 
-	intptr_t HPVRenderBridge::getTexturePtr(uint8_t node_id)
-	{
+    intptr_t HPVRenderBridge::getTexturePtr(uint8_t node_id)
+    {
         if (HPVRendererType::RENDERER_OPENGLCORE == m_renderer)
-		{
-			return m_render_data[node_id].opengl.tex;
-		}
-		else return 0;
-	}
+        {
+            return m_render_data[node_id].opengl.tex;
+        }
+        else return 0;
+    }
     
     GLenum HPVRenderBridge::getGLInternalFormat(uint8_t node_id)
     {
         return (m_render_data[node_id].opengl.gl_format);
     }
 
-	HPVRendererType HPVRenderBridge::getRenderer()
-	{
-		return m_renderer;
-	}
+    HPVRendererType HPVRenderBridge::getRenderer()
+    {
+        return m_renderer;
+    }
     
     void HPVRenderBridge::buffer_func(HPVRenderData * const data)
     {
@@ -318,48 +318,48 @@ namespace HPV {
         }
     }
 
-	void HPVRenderBridge::updateTextures()
-	{
-		std::vector<bool> update_flags = ManagerSingleton()->update();
+    void HPVRenderBridge::updateTextures()
+    {
+        std::vector<bool> update_flags = ManagerSingleton()->update();
 
-		for (uint8_t player_idx = 0; player_idx < update_flags.size(); ++player_idx)
-		{
-			if (update_flags[player_idx])
-			{
-				/* Get specifics for this player */
-				HPVRenderData& render_data = m_render_data[player_idx];
+        for (uint8_t player_idx = 0; player_idx < update_flags.size(); ++player_idx)
+        {
+            if (update_flags[player_idx])
+            {
+                /* Get specifics for this player */
+                HPVRenderData& render_data = m_render_data[player_idx];
 
-				if (render_data.gpu_resources_need_init)
-					return;
+                if (render_data.gpu_resources_need_init)
+                    return;
 
-				if (HPVRendererType::RENDERER_OPENGLCORE == m_renderer)
-				{
-					// be sure to unbind any unpack buffer before start
-					glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+                if (HPVRendererType::RENDERER_OPENGLCORE == m_renderer)
+                {
+                    // be sure to unbind any unpack buffer before start
+                    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
-					glBindTexture(GL_TEXTURE_2D, render_data.opengl.tex);
+                    glBindTexture(GL_TEXTURE_2D, render_data.opengl.tex);
 
-					if (render_data.player->_gather_stats) render_data.stats.before_upload = ns();
+                    if (render_data.player->_gather_stats) render_data.stats.before_upload = ns();
                     
                     /* Main pixel upload func */
                     render_data.render_func(&render_data);
                                         
-					glBindTexture(GL_TEXTURE_2D, 0);
+                    glBindTexture(GL_TEXTURE_2D, 0);
 
-					if (render_data.player->_gather_stats)
-					{
-						render_data.stats.after_upload = ns();
-						render_data.player->_decode_stats.gpu_upload_time = render_data.stats.after_upload - render_data.stats.before_upload;
-					}
-				}
+                    if (render_data.player->_gather_stats)
+                    {
+                        render_data.stats.after_upload = ns();
+                        render_data.player->_decode_stats.gpu_upload_time = render_data.stats.after_upload - render_data.stats.before_upload;
+                    }
+                }
                 
                 if (render_data.player->isStopped() && render_data.gpu_framenum != render_data.player->getCurrentFrameNumber())
                 {
                     update_flags[player_idx] = true;
                 }
-			}
-		}
-	}
+            }
+        }
+    }
     
     uint32_t HPVRenderBridge::getCPUFrameForNode(uint8_t node_idx)
     {
@@ -410,8 +410,8 @@ namespace HPV {
     /*******************************************************************************
      * GLOBAL Renderer functions
      *******************************************************************************/
-	HPVRenderBridge * RendererSingleton()
-	{
-		return &m_HPVRenderer;
-	}
-}
+    HPVRenderBridge * RendererSingleton()
+    {
+        return &m_HPVRenderer;
+    }
+} /* End HPV namespace */

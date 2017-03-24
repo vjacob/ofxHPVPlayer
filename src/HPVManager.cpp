@@ -15,7 +15,7 @@ static void initLog(bool log_to_file)
     {
 #if _WIN32
         char dllPath[MAX_PATH] = { 0 };
-		IMAGE_DOS_HEADER __ImageBase;
+        IMAGE_DOS_HEADER __ImageBase;
         GetModuleFileNameA((HINSTANCE)&__ImageBase, dllPath, _countof(dllPath));
         
         std::string full_path = std::string(dllPath);
@@ -57,8 +57,8 @@ namespace HPV {
     
     HPVManager::~HPVManager()
     {
-		m_event_listeners.clear();
-		HPV_VERBOSE("~HPVMAnager");
+        m_event_listeners.clear();
+        HPV_VERBOSE("~HPVMAnager");
     }
     
     int8_t HPVManager::addPlayer()
@@ -72,9 +72,9 @@ namespace HPV {
             {
                 new_player->addHPVEventSink(&m_event_queue);
             }
-			node_idx = m_num_players;
+            node_idx = m_num_players;
             m_players.insert(std::pair<uint8_t, HPVPlayerRef>(node_idx, new_player));
-			new_player->_id = node_idx;
+            new_player->_id = node_idx;
             m_num_players++;
         }
         
@@ -83,7 +83,7 @@ namespace HPV {
     
     uint8_t HPVManager::initPlayer()
     {
-		return this->addPlayer();
+        return this->addPlayer();
     }
     
     HPVPlayerRef HPVManager::getPlayer(uint8_t node_id)
@@ -130,8 +130,8 @@ namespace HPV {
         
         m_num_players = 0;
 
-		m_players.clear();
-		m_event_queue.clear();
+        m_players.clear();
+        m_event_queue.clear();
         HPV_VERBOSE("Cleared all HPV Players");
     }
     
@@ -146,13 +146,13 @@ namespace HPV {
         {
             HPVEvent event(HPVEventType::HPV_EVENT_NUM_TYPES, nullptr);
             
-			if (m_event_queue.try_pop(event))
-			{             
-				for (HPVEventCallback& listener : m_event_listeners)
-				{
-					if (listener) listener(event);
-				}
-			}
+            if (m_event_queue.try_pop(event))
+            {             
+                for (HPVEventCallback& listener : m_event_listeners)
+                {
+                    if (listener) listener(event);
+                }
+            }
         }
     }
     
@@ -194,12 +194,10 @@ namespace HPV {
   
     void Update()
     {
-		if (ManagerSingleton()->getNumPlayers() > 0)
-		{
-			ManagerSingleton()->processEvents();
-			RendererSingleton()->updateTextures();
-		}
-    }
-    
-} /* Namespace HPV */
-
+        if (ManagerSingleton()->getNumPlayers() > 0)
+        {
+            ManagerSingleton()->processEvents();
+            RendererSingleton()->updateTextures();
+        }
+    }  
+} /* End HPV namespace */

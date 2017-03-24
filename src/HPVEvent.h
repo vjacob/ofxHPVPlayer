@@ -12,7 +12,7 @@
 
 namespace HPV {
     
-	/* Forward declare player class for event to hold pointer */
+    /* Forward declare player class for event to hold pointer */
     class HPVPlayer;
     
     /*
@@ -47,4 +47,4 @@ namespace HPV {
      */
     typedef std::function<void(const HPVEvent&)> HPVEventCallback;
         
-} /* namespace HPV */
+} /* End HPV namespace */
