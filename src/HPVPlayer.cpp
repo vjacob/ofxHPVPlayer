@@ -239,6 +239,18 @@ namespace HPV {
                 _frame_buffer = nullptr;
             }
             
+            if (_frame_sizes_table)
+            {
+                delete [] _frame_sizes_table;
+                _frame_sizes_table = nullptr;
+            }
+            
+            if (_frame_offsets_table)
+            {
+                delete [] _frame_offsets_table;
+                _frame_offsets_table = nullptr;
+            }
+            
             // clear out header
             memset(&_header, 0x00, HPV::amount_header_fields);
             
