@@ -141,7 +141,7 @@ void ofApp::exit()
 - Built and tested with OF 0.9.8
 - Tested on Windows 7, 8 and 10.
 - Tested on Max OSX 10.10.5. 
-- Should work in Linux, but yet to be tested.
+- Tested on Ubuntu Desktop 16.04
 
 ## Licensing
 
