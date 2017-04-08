@@ -1,10 +1,16 @@
 #if _WIN32
 //extern "C" IMAGE_DOS_HEADER __ImageBase;
-#elif defined(__APPLE__) || defined(__linux)
+#elif defined(__APPLE__)
 #include <dlfcn.h>
+#elif defined(__linux)
+#include <limits.h>
+#include <sys/stat.h>
 #endif
 
 #include "HPVManager.h"
+#include "Log.h"
+#include "HPVHeader.h"
+#include "HPVRenderBridge.h"
 
 /* The HPV Manager Singleton */
 HPV::HPVManager m_HPVManager;
@@ -13,6 +19,7 @@ static void initLog(bool log_to_file)
 {
     if (log_to_file)
     {
+        std::string path;
 #if _WIN32
         char dllPath[MAX_PATH] = { 0 };
         IMAGE_DOS_HEADER __ImageBase;
@@ -20,10 +27,9 @@ static void initLog(bool log_to_file)
         
         std::string full_path = std::string(dllPath);
         std::size_t found = full_path.find_last_of("/\\");
-        std::string path = full_path.substr(0, found);
+        path = full_path.substr(0, found);
 #elif __APPLE__
         Dl_info info;
-        std::string path;
         if (dladdr((const void *)initLog, &info)) 
         {
             path += std::string(info.dli_fname);
@@ -34,10 +40,25 @@ static void initLog(bool log_to_file)
             path = path.substr(0, split_idx);
         }
 #elif __linux__
-        //
+        char buf[PATH_MAX];
+        ssize_t num_bytes;
+        num_bytes = readlink("/proc/self/exe", buf, sizeof(buf));
+        if (num_bytes > 0)
+        {
+            path = std::string(buf);
+            int split_idx = path.rfind("/");
+            path = path.substr(0, split_idx);
+        }
 #endif
-        HPV::hpv_log_enable_log_to_file();
-        HPV::hpv_log_init(path.c_str(), HPV_LOG_APPEND);
+        if (path.size() > 0)
+        {
+            HPV::hpv_log_enable_log_to_file();
+            HPV::hpv_log_init(path.c_str(), HPV_LOG_APPEND);
+        }
+        else
+        {
+            HPV::hpv_log_disable_log_to_file();
+        }
     }
     else
     {

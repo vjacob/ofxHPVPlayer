@@ -1,11 +1,40 @@
+#include <string.h>
+
 #include "HPVPlayer.h"
+#include "lz4.h"
+#include "lz4hc.h"
 
 namespace HPV {
-    
+
+    static std::string HPVCompressionTypeStrings[] =
+    {
+        "DXT1 (no ALPHA)",
+        "DXT5 (with ALPHA)",
+        "SCALED DXT5 (CoCg_Y)"
+    };
+
+    // helper function to read HPV header from file
+    static int readHeader(std::ifstream * const ifs, HPVHeader * const header)
+    {
+        int header_size = sizeof(uint32_t) * amount_header_fields;
+        
+        ifs->read((char *)header, header_size);
+        
+        if (ifs->fail())
+            return -1;
+        
+        return 0;
+    }
+
     HPVPlayer::HPVPlayer()
-    : _num_bytes_in_header(0)
-    , _id(0)
+    : _id(0)
+    , _gather_stats(true)
+    , _num_bytes_in_header(0)
+    , _num_bytes_in_sizes_table(0)
     , _filesize(0)
+    , _frame_sizes_table(nullptr)
+    , _frame_offsets_table(nullptr)
+    , _frame_buffer(nullptr)
     , _bytes_per_frame(0)
     , _new_frame_time(0)
     , _global_time_per_frame(0)
@@ -18,13 +47,10 @@ namespace HPV {
     , _loop_mode(HPV_LOOPMODE_LOOP)
     , _state(HPV_STATE_NONE)
     , _direction(HPV_DIRECTION_FORWARDS)
-    , _frame_buffer(nullptr)
     , _is_init(false)
-    , _gather_stats(true)
+    , _should_update(false)
     , _m_event_sink(nullptr)
-    , _frame_sizes_table(nullptr)
     {
-        _should_update = false;
         _update_result.store(0, std::memory_order_relaxed);
         _was_seeked.store(false, std::memory_order_relaxed);
         _header.magic = 0;

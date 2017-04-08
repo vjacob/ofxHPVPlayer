@@ -132,7 +132,7 @@ namespace HPV {
         std::string     getFileSummary();
         
     private:
-        HPVHeader       _header;
+
        
         std::ifstream   _ifs;
         std::string     _file_path;
@@ -142,6 +142,7 @@ namespace HPV {
         size_t          _filesize;
         uint32_t *      _frame_sizes_table;
         uint64_t *      _frame_offsets_table;
+        unsigned char*  _frame_buffer;
         size_t          _bytes_per_frame;
         uint64_t        _new_frame_time;
         uint64_t        _global_time_per_frame;
@@ -152,6 +153,9 @@ namespace HPV {
         int64_t         _loop_in;
         int64_t         _loop_out;
         uint8_t         _loop_mode;
+        int             _state;
+        int             _direction;
+        bool            _is_init;
         volatile bool   _should_update;
         std::atomic<int> _update_result;
         std::atomic<int> _seek_result;
@@ -159,11 +163,8 @@ namespace HPV {
         std::thread     _update_thread;
         std::mutex      _mtx;
         std::condition_variable _seeked_signal;
-        int             _state;
-        int             _direction;
-        bool            _is_init;
-        
-        unsigned char*  _frame_buffer;
+
+        HPVHeader       _header;
         
         void            populateFrameOffsets(uint32_t);
         int             readCurrentFrame();

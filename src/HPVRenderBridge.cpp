@@ -8,8 +8,6 @@ namespace HPV {
 
     /* The HPV Renderer Singleton */
     HPVRenderBridge m_HPVRenderer;
-    
-    static bool m_double_buffer = false;
 
     static void ReportGLError()
     {

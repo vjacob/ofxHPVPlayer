@@ -28,7 +28,7 @@
 #  include <windows.h>
 #endif
 
-static uint64_t ns() {
+inline uint64_t ns() {
     static uint64_t is_init = 0;
 #if defined(__APPLE__)
     static mach_timebase_info_data_t info;

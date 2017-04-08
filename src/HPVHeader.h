@@ -12,9 +12,6 @@
 #include <fstream>
 #include <memory>
 
-#include "lz4.h"
-#include "lz4hc.h"
-
 #define HPV_MAGIC 0x48505646
 
 #define HPV_VERSION_0_0_0 0     /* The first release; simply wrotes every file concatenated into the output. */
@@ -48,15 +45,7 @@ namespace HPV
         HPV_TYPE_DXT5_ALPHA,
         HPV_TYPE_SCALED_DXT5_CoCg_Y,
         HPV_NUM_TYPES = 3
-    };
-        
-    static std::string HPVCompressionTypeStrings[] =
-    {
-        "DXT1 (no ALPHA)",
-        "DXT5 (with ALPHA)",
-        "SCALED DXT5 (CoCg_Y)"
-    };
-        
+    };    
     
     // This struct defines the layout of the HPV header that exists in the beginning of any *.hpv video file
     struct HPVHeader
@@ -84,38 +73,11 @@ namespace HPV
     static const int amount_header_fields = 10;
     
     // swap big <-> little endian
-    static inline void swap_endian(uint32_t &val)
+    inline void swap_endian(uint32_t &val)
     {
         val = (val << 24) |
         ((val << 8) & 0x00ff0000) |
         ((val >> 8) & 0x0000ff00) |
         (val >> 24);
-    }
-    
-    // helper function to read HPV header from file
-    static int readHeader(std::ifstream * const ifs, HPVHeader * const header)
-    {
-        int header_size = sizeof(uint32_t) * amount_header_fields;
-        
-        ifs->read((char *)header, header_size);
-        
-        if (ifs->fail())
-            return -1;
-        
-        return 0;
-    }
-    
-    // helper function to write header to HPV file
-    static int writeHeader(const std::unique_ptr<std::ofstream>& ofs, const HPVHeader& header)
-    {
-        int header_size = sizeof(uint32_t) * amount_header_fields;
-        
-        ofs->write((char *)&header, header_size);
-        
-        if (ofs->fail())
-            return -1;
-        
-        ofs->flush();
-        return 0;
     }
 } /* End HPV namespace */

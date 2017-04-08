@@ -14,12 +14,9 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "Log.h"
-#include "HPVHeader.h"
-#include "HPVPlayer.h"
-#include "HPVRenderBridge.h"
 #include "ThreadSafeQueue.h"
 #include "HPVEvent.h"
+#include "HPVPlayer.h"
 
 namespace HPV {
 
