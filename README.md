@@ -140,7 +140,7 @@ void ofApp::exit()
 
 - Built and tested with OF 0.9.8
 - Tested on Windows 7, 8 and 10.
-- Tested on Max OSX 10.10.5. 
+- Tested on Max OSX 10.12.4 (should work until 10.9) 
 - Tested on Ubuntu Desktop 16.04
 
 ## Licensing
