@@ -4,8 +4,7 @@
 int main( )
 {
     ofGLWindowSettings settings;
-    settings.width = 1024;
-    settings.height = 512;
+    settings.setSize(1024, 512);
     settings.windowMode = OF_WINDOW;
     settings.setGLVersion(4, 1);
     
