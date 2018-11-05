@@ -4,6 +4,8 @@
 #include "lz4.h"
 #include "lz4hc.h"
 
+#define __STDC_FORMAT_MACROS
+
 namespace HPV {
 
     static std::string HPVCompressionTypeStrings[] =
