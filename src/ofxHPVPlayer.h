@@ -88,6 +88,7 @@ public:
     std::string         getFileSummary();
     
     void                draw(float x, float y, float width, float height);
+    void                drawSubsection(float x, float y, float w, float h, float sx, float sy, float sw, float sh);
 
 private:
     ofShader            m_shader;

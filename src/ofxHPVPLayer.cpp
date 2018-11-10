@@ -406,3 +406,22 @@ void ofxHPVPlayer::draw(float x, float y, float width, float height)
         }
     }
 }
+
+void ofxHPVPlayer::drawSubsection(float x, float y, float width, float height, float sx, float sy, float sw, float sh)
+{
+    if (m_texture.isAllocated())
+    {
+        if (m_hpv_player->getCompressionType() == HPVCompressionType::HPV_TYPE_SCALED_DXT5_CoCg_Y)
+        {
+            m_shader.begin();
+            m_shader.bindDefaults();
+        }
+        
+        m_texture.drawSubsection(x, y, width, height, sx, sy, sw, sh);
+        
+        if (m_hpv_player->getCompressionType() == HPVCompressionType::HPV_TYPE_SCALED_DXT5_CoCg_Y)
+        {
+            m_shader.end();
+        }
+    }
+}
