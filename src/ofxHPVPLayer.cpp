@@ -344,15 +344,15 @@ void ofxHPVPlayer::setPlayDirection(bool direction)
 }
 
 // seek to normalized pos in range [0.,1.]
-void ofxHPVPlayer::seekToPos(double pos)
+void ofxHPVPlayer::seekToPos(double pos, bool sync)
 {
-    m_hpv_player->seek(pos);
+    m_hpv_player->seek(pos, sync);
 }
 
 // seek to frame number
-void ofxHPVPlayer::seekToFrame(int64_t frame)
+void ofxHPVPlayer::seekToFrame(int64_t frame, bool sync)
 {
-    m_hpv_player->seek(frame);
+    m_hpv_player->seek(frame, sync);
 }
 
 bool ofxHPVPlayer::needsDoubleBuffering() const

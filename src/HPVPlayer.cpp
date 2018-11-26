@@ -690,7 +690,7 @@ namespace HPV {
         return HPV_RET_ERROR_NONE;
     }
     
-    int HPVPlayer::seek(double pos)
+    int HPVPlayer::seek(double pos, bool sync)
     {
         if (pos < 0.0 || pos > 1.0)
             return HPV_RET_ERROR;
@@ -707,23 +707,42 @@ namespace HPV {
         {
             _seeked_frame = clamp<int64_t>(static_cast<int64_t>(std::floor( (_header.number_of_frames-1) * pos)), _loop_in, _loop_out);
         }
+        
+        if (_seeked_frame == _curr_frame)
+        {
+            return HPV_RET_ERROR;
+        }
     
-        return this->seekSync();
+        _was_seeked.store(true, std::memory_order_relaxed);
+
+        if (sync)
+            return this->seekSync();
+        
+        return HPV_RET_ERROR_NONE;
     }
     
-    int HPVPlayer::seek(int64_t frame)
+    int HPVPlayer::seek(int64_t frame, bool sync)
     {
         if (frame < 0 || frame >= _header.number_of_frames)
             return HPV_RET_ERROR;
         
         _seeked_frame = clamp<int64_t>(frame, _loop_in, _loop_out);
         
-        return this->seekSync();
+        if (_seeked_frame == _curr_frame)
+        {
+            return HPV_RET_ERROR;
+        }
+        
+        _was_seeked.store(true, std::memory_order_relaxed);
+
+        if (sync)
+            return this->seekSync();
+        
+        return HPV_RET_ERROR_NONE;
     }
     
     int HPVPlayer::seekSync()
     {
-        _was_seeked.store(true, std::memory_order_relaxed);
         _seek_result.store(0, std::memory_order_relaxed);
         
         std::unique_lock<std::mutex> lock(_mtx);

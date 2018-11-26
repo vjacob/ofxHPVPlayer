@@ -73,8 +73,8 @@ public:
     void                setLoopIn(uint64_t loopIn);
     void                setLoopOut(uint64_t loopOut);
     void                setPlayDirection(bool direction);
-    void                seekToPos(double pos);
-    void                seekToFrame(int64_t frame);
+    void                seekToPos(double pos, bool sync = true);
+    void                seekToFrame(int64_t frame, bool sync = true);
     
     void                setDoubleBuffered(bool bDoubleBuffer);
      

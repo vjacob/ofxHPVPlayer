@@ -89,8 +89,8 @@ namespace HPV {
         int             setLoopOutPoint(int64_t loop_out);
         int             setPlayDirection(uint8_t direction);
         int             setSpeed(double speed);
-        int             seek(double pos);
-        int             seek(int64_t frame);
+        int             seek(double pos, bool sync = true);
+        int             seek(int64_t frame, bool sync = true);
         
         int             getWidth();
         int             getHeight();
