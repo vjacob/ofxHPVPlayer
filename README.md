@@ -126,7 +126,7 @@ void ofApp::exit()
 ## Documentation
 
 - Check the examples showcasing different HPV functionalities.
-- Pre-compressed HPV video files accompanying the examples can be found [here](https://goo.gl/UGv5TP). Download the appropiate HPV file by looking at the examples and put it in the respective bin/data folder
+- Pre-compressed HPV video files accompanying the examples can be found [here](https://drive.google.com/drive/folders/0B7qWdDSl0aMtT0JfbmRmYmNILTA?resourcekey=0-tSfgsLzbtfz8LQTZqB7WWQ&usp=sharing). Download the appropiate HPV file by looking at the examples and put it in the respective bin/data folder
 - **example-simple**: This is a barebones example on how to play an HPV file.
 - **example-controls**: This showcases (almost) all functionality available in the HPV system.
 - **example-slave-to-audio**: Sync a HPV video file to an audio file with **exactly** the same length.
