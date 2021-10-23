@@ -68,7 +68,7 @@ int main( )
 
 ## Getting Started
 
-- Creating HPV files with the HPVCreator. There exist a [Qt UI version](https://github.com/HasseltVR/Holo_Toolset/releases) and a [console version](https://github.com/HasseltVR/Holo_Toolset/tree/master/HPV_Creator_Console), both cross-platform. Or download the example HPV files [here](https://goo.gl/UGv5TP).
+- Creating HPV files with the HPVCreator. There exist a [Qt UI version](https://github.com/HasseltVR/Holo_Toolset/releases) and a [console version](https://github.com/HasseltVR/Holo_Toolset/tree/master/HPV_Creator_Console), both cross-platform. Or download the example HPV files [here](https://drive.google.com/drive/folders/0B7qWdDSl0aMtT0JfbmRmYmNILTA?resourcekey=0-tSfgsLzbtfz8LQTZqB7WWQ&usp=sharing).
 - Generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
 - A good place to start is the `example-controls` project. Play around with the GUI to discover its functionality.
 - Minimal code that you need to play an HPV file:
