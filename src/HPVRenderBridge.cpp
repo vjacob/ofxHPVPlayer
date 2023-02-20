@@ -59,7 +59,7 @@ namespace HPV {
         HPV_VERBOSE("Using GLEW %s with OpenGL %s", glewGetString(GLEW_VERSION), glGetString(GL_VERSION));
         
 #ifndef TARGET_EMSCRIPTEN
-        if (major != 4 || (major == 4 && minor < 1) || defined(__EMSCRIPTEN__) )
+        if (major != 4 || (major == 4 && minor < 1))
         {
             throw std::runtime_error("OpenGL version too low, the HPV eco-system needs at least an OpenGL 4.1 context");
         }
