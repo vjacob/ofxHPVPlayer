@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#if defined(__linux)
+#if defined(__linux) || defined(__EMSCRIPTEN__)
 #  define HAVE_POSIX_TIMER
 #  include <time.h>
 #  ifdef CLOCK_MONOTONIC
@@ -41,7 +41,7 @@ inline uint64_t ns() {
     now *= info.numer;
     now /= info.denom;
     return now;
-#elif defined(__linux)
+#elif defined(__linux) || defined(__EMSCRIPTEN__)
     static struct timespec linux_rate;
     if (0 == is_init) {
         clock_getres(CLOCKID, &linux_rate);
