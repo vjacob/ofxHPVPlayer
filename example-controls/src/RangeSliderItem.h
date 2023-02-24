@@ -87,11 +87,6 @@ public:
 
     }
     
-    std::string& getName()
-    {
-        
-    }
-    
     void setPlayhead(float _cur_pos)
     {
         cur_pos = _cur_pos*hit_zone.width;

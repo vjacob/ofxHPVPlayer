@@ -80,11 +80,6 @@ public:
         
     }
     
-    std::string& getName()
-    {
-        
-    }
-    
     void mouseDown(const ofVec2f& _mouse)
     {
         cur_pos = (_mouse.x - hit_zone.x) / hit_zone.width;
