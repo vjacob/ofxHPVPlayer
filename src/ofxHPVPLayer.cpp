@@ -1,7 +1,6 @@
 #include "ofxHPVPlayer.h"
 
-static const GLchar* vert_CT_CoCg_Y = R"(
-    #version 410
+static const GLchar* vert_CT_CoCg_Y = R"(OF_GLSL_SHADER_HEADER
 
     // addressed by OF
     uniform mat4 modelViewMatrix;
@@ -24,8 +23,7 @@ static const GLchar* vert_CT_CoCg_Y = R"(
     }
 )";
 
-static const GLchar* frag_CT_CoCg_Y = R"(
-    #version 410
+static const GLchar* frag_CT_CoCg_Y = R"(OF_GLSL_SHADER_HEADER
 
     const vec4 offsets = vec4(0.50196078431373, 0.50196078431373, 0.0, 0.0);
     const float scale_factor = 255.0 / 8.0;
@@ -42,7 +40,7 @@ static const GLchar* frag_CT_CoCg_Y = R"(
         rgba -= offsets;
         
         float Y = rgba.a;
-        float scale = rgba.b * scale_factor + 1;
+        float scale = rgba.b * scale_factor + 1.;
         float Co = rgba.r / scale;
         float Cg = rgba.g / scale;
         
